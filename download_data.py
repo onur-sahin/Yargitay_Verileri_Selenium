@@ -15,31 +15,46 @@ def download_data(start_date, end_date):
 
    action = ActionChains(driver1.driver, 1000)
 
-   captcha.save_current_img(driver1.driver)
+   captcha.save_current_img(driver1)
+
+   driver1.get_detayli_arama_we().location_once_scrolled_into_view
+   time.sleep(1)
+   driver1.get_detayli_arama_we().click()
+   time.sleep(1)
 
 
-   #action.perform()
-   action.move_to_element(driver1.get_captcha_input_we())
+   driver1.get_captcha_input_we().location_once_scrolled_into_view
+   time.sleep(1)
    action.send_keys_to_element(driver1.get_captcha_input_we(), captcha.get_captcha_code())
    action.perform()
 
-   # action.move_to_element(driver1.get_karar_yili_we())
-   # action.send_keys_to_element(driver1.get_karar_yili_we(), str(start_date.year))
-   # action.perform()
+
+   driver1.get_karar_yili_we().location_once_scrolled_into_view
+   time.sleep(1)
    driver1.get_karar_yili_we().send_keys(str(start_date.year))
 
 
-   # action.move_to_element(driver1.get_tarih_bas_we())
-   # action.send_keys_to_element(driver1.get_tarih_bas_we(),  get_str_date(start_date) )
-   # action.perform()
+   driver1.get_tarih_bas_we().location_once_scrolled_into_view
+   time.sleep(1)
    driver1.get_tarih_bas_we().send_keys(get_str_date(start_date))
    
-   #action.move_to_element(driver1.get_tarih_son_we())
-   # action.send_keys_to_element(driver1.get_tarih_son_we(), get_str_date(end_date) )
-   # action.perform()
+
+   driver1.get_tarih_son_we().location_once_scrolled_into_view
+   time.sleep(1)
    driver1.get_tarih_son_we().send_keys(get_str_date(end_date))
+
 
    action.move_to_element_with_offset(driver1.get_search_we(),0, 0)
    action.perform()
    driver1.get_search_we().send_keys(Keys.RETURN)
-   
+
+   time.sleep(3)
+
+
+   print("0\n")
+   logo_we = driver1.get_logo()
+   logo_we.location_once_scrolled_into_view
+   print("1\n")
+   print("2\n")
+   #logo_we.location # x ve y ikilisini verir
+   #driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")

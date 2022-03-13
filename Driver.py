@@ -1,3 +1,4 @@
+from lib2to3.pgen2 import driver
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.keys import Keys
@@ -25,33 +26,70 @@ class Driver:
       )
 
       self.driver.get(url)
+      
+      # self.detayli_arama_we = WebDriverWait(self.driver, 10).until(
+      #    EC.presence_of_element_located(
+      #       (By.ID, "aramaForm:detayliAramaLabel")
+      #    )
+      # )
+      
+      # self.detayli_arama_we.click()
+      
+      # self.captcha_input_we = self.driver.find_element(By.ID, "aramaForm:guvenlikKodu")
 
-      self.detayli_arama_we = WebDriverWait(self.driver, 10).until(
+      # self.cptImg_we = self.driver.find_element(By.ID, "aramaForm:cptImg")
+
+      # self.karar_yili_we = self.driver.find_element(By.ID, "aramaForm:karaYilInput")
+
+      # self.tarih_bas_we = self.driver.find_element(By.ID, "aramaForm:ilkTarih_input")
+
+      # self.tarih_son_we = self.driver.find_element(By.ID, "aramaForm:sonTarih_input")
+
+      # self.search_we = self.driver.find_element(By.ID, "aramaForm:detayliAraCommandButton")
+
+   def get_we(self, type, str, element, element_type):
+
+      if(type == "CLASS_NAME"):
+         self.get_we = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(
+               (By.CLASS_NAME, str)
+            )
+         )
+
+         
+
+      if(type == "CSS_SELECTOR"):
+         self.get_we = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(
+               (By.CSS_SELECTOR, element+"["+element_type+"*='"+str+"']")
+            )
+         )
+      
+      
+      
+      return self.get_we
+
+   
+   def get_logo(self):
+      
+      self.get_logo = WebDriverWait(self.driver, 10).until(
          EC.presence_of_element_located(
-            (By.ID, "aramaForm:detayliAramaLabel")
+            (By.CSS_SELECTOR, "img[class='img-responsive logo']")
          )
       )
-      
-      self.detayli_arama_we.click()
-      
-      self.captcha_input_we = self.driver.find_element(By.ID, "aramaForm:guvenlikKodu")
-
-      self.cptImg_we = self.driver.find_element(By.ID, "aramaForm:cptImg")
-
-      self.karar_yili_we = self.driver.find_element(By.ID, "aramaForm:karaYilInput")
-
-      self.tarih_bas_we = self.driver.find_element(By.ID, "aramaForm:ilkTarih_input")
-
-      self.tarih_son_we = self.driver.find_element(By.ID, "aramaForm:sonTarih_input")
-
-      self.search_we = self.driver.find_element(By.ID, "aramaForm:detayliAraCommandButton")
+      return self.get_logo
 
 
 
    def get_detayli_arama_we(self):
+      # self.detayli_arama_we = WebDriverWait(self.driver, 10).until(
+      #    EC.presence_of_element_located(
+      #       (By.ID, "aramaForm:detayliAramaLabel")
+      #    )
+      # )
       self.detayli_arama_we = WebDriverWait(self.driver, 10).until(
          EC.presence_of_element_located(
-            (By.ID, "aramaForm:detayliAramaLabel")
+            (By.CSS_SELECTOR, "span[id='aramaForm:detayliAramaLabel'")
          )
       )
       return self.detayli_arama_we
@@ -59,7 +97,7 @@ class Driver:
    def get_captcha_input_we(self):
       self.captcha_input_we = WebDriverWait(self.driver, 10).until(
          EC.presence_of_element_located(
-            (By.ID, "aramaForm:guvenlikKodu")
+            (By.CSS_SELECTOR, "input[id='aramaForm:guvenlikKodu']")
          )
       )
       return self.captcha_input_we
@@ -67,7 +105,7 @@ class Driver:
    def get_cptImg_we(self):
       self.cptImg_we = WebDriverWait(self.driver, 10).until(
          EC.presence_of_element_located(
-            (By.ID, "aramaForm:cptImg")
+            (By.CSS_SELECTOR, "img[id='aramaForm:cptImg']")
          )
       )
       return self.cptImg_we

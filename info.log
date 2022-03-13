@@ -442,3 +442,253 @@
 2021-12-22 00:29:42,338 - WDM - INFO - Current firefox version is 95.0
 2021-12-22 00:29:42,339 - WDM - INFO - Get LATEST geckodriver version for 95.0 firefox
 2021-12-22 00:29:42,697 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 16:18:07,937 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 16:18:07,937 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 16:18:07,950 - WDM - INFO - 
+
+2022-03-12 16:18:07,952 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 16:18:08,932 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 16:18:08,932 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 16:18:09,483 - WDM - INFO - Getting latest mozilla release info for v0.30.0
+2022-03-12 16:18:09,918 - WDM - INFO - Trying to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-win64.zip
+2022-03-12 16:18:13,878 - WDM - INFO - Driver has been saved in cache [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0]
+2022-03-12 16:49:00,475 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 16:49:00,475 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 16:49:00,493 - WDM - INFO - 
+
+2022-03-12 16:49:00,494 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 16:49:01,502 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 16:49:01,503 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 16:49:02,004 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 16:52:04,313 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 16:52:04,317 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 16:52:04,319 - WDM - INFO - 
+
+2022-03-12 16:52:04,321 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 16:52:05,237 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 16:52:05,238 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 16:52:05,572 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 16:54:09,300 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 16:54:09,304 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 16:54:09,306 - WDM - INFO - 
+
+2022-03-12 16:54:09,308 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 16:54:10,236 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 16:54:10,238 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 16:54:10,771 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 17:21:01,933 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 17:21:01,933 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 17:21:01,941 - WDM - INFO - 
+
+2022-03-12 17:21:01,943 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 17:21:02,900 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 17:21:02,901 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 17:21:03,250 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 17:23:04,726 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 17:23:04,727 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 17:23:04,728 - WDM - INFO - 
+
+2022-03-12 17:23:04,730 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 17:23:05,664 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 17:23:05,665 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 17:23:06,006 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 17:24:47,173 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 17:24:47,175 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 17:24:47,176 - WDM - INFO - 
+
+2022-03-12 17:24:47,178 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 17:24:48,147 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 17:24:48,151 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 17:24:48,545 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 17:26:45,735 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 17:26:45,736 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 17:26:45,737 - WDM - INFO - 
+
+2022-03-12 17:26:45,739 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 17:26:46,749 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 17:26:46,751 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 17:26:47,101 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 17:27:54,652 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 17:27:54,652 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 17:27:54,657 - WDM - INFO - 
+
+2022-03-12 17:27:54,659 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 17:27:55,603 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 17:27:55,616 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 17:27:56,112 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 17:30:14,760 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 17:30:14,764 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 17:30:14,766 - WDM - INFO - 
+
+2022-03-12 17:30:14,768 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 17:30:15,687 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 17:30:15,688 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 17:30:16,019 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 17:35:58,457 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 17:35:58,457 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 17:35:58,460 - WDM - INFO - 
+
+2022-03-12 17:35:58,462 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 17:35:59,376 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 17:35:59,383 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 17:35:59,995 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 17:47:07,620 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 17:47:07,620 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 17:47:07,636 - WDM - INFO - 
+
+2022-03-12 17:47:07,637 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 17:47:08,549 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 17:47:08,550 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 17:47:09,044 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 17:49:17,893 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 17:49:17,893 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 17:49:17,901 - WDM - INFO - 
+
+2022-03-12 17:49:17,903 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 17:49:18,802 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 17:49:18,814 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 17:49:19,158 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 17:50:15,188 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 17:50:15,188 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 17:50:15,190 - WDM - INFO - 
+
+2022-03-12 17:50:15,192 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 17:50:16,147 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 17:50:16,148 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 17:50:16,498 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 17:57:00,514 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 17:57:00,518 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 17:57:00,520 - WDM - INFO - 
+
+2022-03-12 17:57:00,521 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 17:57:01,451 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 17:57:01,451 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 17:57:01,798 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 18:19:17,488 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 18:19:17,490 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 18:19:17,491 - WDM - INFO - 
+
+2022-03-12 18:19:17,493 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 18:19:18,458 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 18:19:18,458 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 18:19:18,815 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 18:26:17,285 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 18:26:17,286 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 18:26:17,288 - WDM - INFO - 
+
+2022-03-12 18:26:17,289 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 18:26:18,248 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 18:26:18,248 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 18:26:18,608 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 18:32:33,106 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 18:32:33,106 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 18:32:33,108 - WDM - INFO - 
+
+2022-03-12 18:32:33,110 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 18:32:34,063 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 18:32:34,063 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 18:32:34,391 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 18:33:41,516 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 18:33:41,518 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 18:33:41,520 - WDM - INFO - 
+
+2022-03-12 18:33:41,521 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 18:33:42,438 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 18:33:42,438 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 18:33:42,953 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 18:40:32,746 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 18:40:32,746 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 18:40:32,753 - WDM - INFO - 
+
+2022-03-12 18:40:32,755 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 18:40:33,794 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 18:40:33,796 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 18:40:34,131 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 18:42:04,123 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 18:42:04,123 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 18:42:04,130 - WDM - INFO - 
+
+2022-03-12 18:42:04,131 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 18:42:05,039 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 18:42:05,041 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 18:42:05,386 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 18:49:06,909 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 18:49:06,909 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 18:49:06,913 - WDM - INFO - 
+
+2022-03-12 18:49:06,915 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 18:49:07,851 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 18:49:07,852 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 18:49:08,446 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 18:58:37,654 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 18:58:37,655 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 18:58:37,656 - WDM - INFO - 
+
+2022-03-12 18:58:37,657 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 18:58:38,622 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 18:58:38,624 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 18:58:38,966 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 19:14:30,261 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 19:14:30,261 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 19:14:30,275 - WDM - INFO - 
+
+2022-03-12 19:14:30,277 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 19:14:31,247 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 19:14:31,254 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 19:14:31,764 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 19:16:45,339 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 19:16:45,339 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 19:16:45,354 - WDM - INFO - 
+
+2022-03-12 19:16:45,356 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 19:16:46,324 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 19:16:46,325 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 19:16:46,840 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 20:35:29,620 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 20:35:29,620 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 20:35:29,628 - WDM - INFO - 
+
+2022-03-12 20:35:29,630 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 20:35:30,536 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 20:35:30,536 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 20:35:31,003 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 20:36:36,036 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 20:36:36,036 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 20:36:36,049 - WDM - INFO - 
+
+2022-03-12 20:36:36,051 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 20:36:37,026 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 20:36:37,026 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 20:36:37,380 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 20:38:07,878 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 20:38:07,879 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 20:38:07,881 - WDM - INFO - 
+
+2022-03-12 20:38:07,883 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 20:38:08,822 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 20:38:08,823 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 20:38:09,154 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 20:52:11,057 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 20:52:11,057 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 20:52:11,061 - WDM - INFO - 
+
+2022-03-12 20:52:11,062 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 20:52:12,029 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 20:52:12,030 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 20:52:12,383 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 21:02:21,528 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 21:02:21,528 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 21:02:21,536 - WDM - INFO - 
+
+2022-03-12 21:02:21,538 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 21:02:22,442 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 21:02:22,442 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 21:02:22,791 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache
+2022-03-12 21:06:22,855 - root - WARNING - dosya zaten var dosya oluşturulmadı
+2022-03-12 21:06:22,856 - root - INFO - create_img_folder() fonksiyonu başarı ile çalıştı
+2022-03-12 21:06:22,857 - WDM - INFO - 
+
+2022-03-12 21:06:22,859 - WDM - INFO - ====== WebDriver manager ======
+2022-03-12 21:06:23,811 - WDM - INFO - Current firefox version is 98.0
+2022-03-12 21:06:23,811 - WDM - INFO - Get LATEST geckodriver version for 98.0 firefox
+2022-03-12 21:06:24,148 - WDM - INFO - Driver [C:\Users\asus\.wdm\drivers\geckodriver\win64\v0.30.0\geckodriver.exe] found in cache

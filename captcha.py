@@ -80,13 +80,13 @@ def get_last_img_number():
       return 0
 
 
-def save_current_img(driver):
+def save_current_img(driver1):
    imgName= str( get_last_img_number() + 1 )
    with open(imgDir + os.sep + imgName + '.png', 'wb') as file:
-      file.write(driver.find_element(By.ID, 'aramaForm:cptImg').screenshot_as_png)
+      file.write(driver1.get_cptImg_we().screenshot_as_png)
 
-def get_current_img(driver):
-   return driver.find_element(By.ID, 'aramaForm:cptImg').screenshot_as_png
+def get_current_img(driver1):
+   return driver1.get_cptImg_we().screenshot_as_png
 
 def get_image_path(number):
    path = os.getcwd() + os.sep + folderName + os.sep + str(number) +'.png'
