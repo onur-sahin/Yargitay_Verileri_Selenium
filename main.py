@@ -17,7 +17,7 @@ end = datetime.datetime(2021, 12, 17)
 
 download_data(start, end)
 
-time.sleep(1000)
+time.sleep(120)
 
 
 
