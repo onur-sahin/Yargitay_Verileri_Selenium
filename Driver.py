@@ -142,4 +142,35 @@ class Driver:
       )
       return self.search_we
 
+   def get_data_ri_we(self, no):
+      self.get_data_ri_we = WebDriverWait(self.driver, 10).until(
+         EC.presence_of_element_located(
+            (By.CSS_SELECTOR, "tr[data-ri='" + str(no) + "']")
+         )
+      )
+      return self.get_data_ri_we
+
+   def get_data_ri_count(self):
+      self.get_data_ri_count = WebDriverWait(self.driver, 10).until(
+         EC.presence_of_all_elements_located(
+            (By.CSS_SELECTOR, "tr[data-ri*=''")
+         ).count()
+      )
+      return self.get_data_ri_count
+
+   def get_data_ri_button_we(self, no):
+      self.get_data_ri_we = WebDriverWait(self.driver, 10).until(
+         EC.presence_of_element_located(
+            (By.CSS_SELECTOR, "button[onclick='PrimeFaces.ab({s:\"aramaForm:sonucTable:0:rowbtn\",p:\"aramaForm:sonucTable:0:rowbtn\",u:\"aramaForm:karakIcerikPanel\",onst:function(cfg){disableScroll();;}});return false;']")
+         )
+      )
+      return self.get_data_ri_button_we
+      
+      #.find_element(By.CSS_SELECTOR, "span[class='ui-button-icon-left ui-icon ui-c ui-icon-search']")
+
+      #"button[id='aramaForm:sonucTable:" + str(no) + ":rowbtn'"
+
+   def data_ri_click(self, no):
+      self.driver.execute_script("document.getElementById(\"aramaForm:sonucTable:" + str(no) + ":rowbtn\").click();")
+
 

@@ -25,6 +25,7 @@ driver2 = webdriver.Firefox(
 )
 
 driver2.get(url1)
+driver2.find_elements(By.ID, "ali").count()
 
 logo_we = WebDriverWait(driver2, 10).until(
    EC.presence_of_element_located(
@@ -49,8 +50,7 @@ ara = WebDriverWait(driver2, 10).until(
 )
 
 
-
-print(ara.location)
-print(logo_we.location_once_scrolled_into_view)
+#print("BURA" + ara.get_attribute('innerHTML'))
+#print(logo_we.location_once_scrolled_into_view)
 
 time.sleep(5)

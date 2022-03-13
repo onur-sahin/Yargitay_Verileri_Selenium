@@ -43,18 +43,20 @@ def download_data(start_date, end_date):
    time.sleep(1)
    driver1.get_tarih_son_we().send_keys(get_str_date(end_date))
 
-
-   action.move_to_element_with_offset(driver1.get_search_we(),0, 0)
-   action.perform()
+   driver1.get_search_we().location_once_scrolled_into_view
    driver1.get_search_we().send_keys(Keys.RETURN)
 
    time.sleep(3)
 
 
-   print("0\n")
-   logo_we = driver1.get_logo()
-   logo_we.location_once_scrolled_into_view
    print("1\n")
+
+ 
+
+   count_element = driver1.driver.execute_script("return document.getElementById(\"aramaForm:sonucTable_data\").childElementCount")
+   
+   
+   print("1.5\n")
+   
+   driver1.data_ri_click(0)
    print("2\n")
-   #logo_we.location # x ve y ikilisini verir
-   #driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
