@@ -1,2 +1,2 @@
-captha_images/
-.log/
+/captha_images
+/*.log
