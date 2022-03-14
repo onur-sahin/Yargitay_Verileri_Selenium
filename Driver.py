@@ -1,4 +1,6 @@
+from asyncio.windows_events import NULL
 from lib2to3.pgen2 import driver
+import logging
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.keys import Keys
@@ -171,6 +173,45 @@ class Driver:
       #"button[id='aramaForm:sonucTable:" + str(no) + ":rowbtn'"
 
    def data_ri_click(self, no):
-      self.driver.execute_script("document.getElementById(\"aramaForm:sonucTable:" + str(no) + ":rowbtn\").click();")
+      try:
+         self.driver.execute_script("document.getElementById(\"aramaForm:sonucTable:" + str(no) + ":rowbtn\").click();")
+      except:
+         logging.error("data_ri_click()" + str(no) +". satirinda hata")
+         return False
+      else:
+         return True
+
+
+   def get_karar_icerik_panel_we(self):
+
+      try:
+         self.get_karar_icerik_panel_we = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(
+               (By.CSS_SELECTOR, "div[id='aramaForm:karakIcerikPanel']")
+            )
+         )
+      except:
+         logging.error("get_karar_icerik_panel_we() fonksiyonunda hata!")
+         return NULL
+      else:
+         return self.get_karar_icerik_panel_we
+
+
+   def copy_karar_icerik_panel(self):
+      try:
+         #self.copy_karar_icerik_panel = self.driver.execute_script("")
+         self.copy_karar_icerik_panel = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(
+               (By.CSS_SELECTOR, "p[align='justify']")
+            )
+         )
+
+      except:
+         logging.error("copy_karar_icerik_panel() fonksiyonunda hata")
+         return NULL
+
+      else:
+         return self.copy_karar_icerik_panel
+
 
 

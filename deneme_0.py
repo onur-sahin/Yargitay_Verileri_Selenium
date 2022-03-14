@@ -25,7 +25,7 @@ driver2 = webdriver.Firefox(
 )
 
 driver2.get(url1)
-driver2.find_elements(By.ID, "ali").count()
+driver2.find_elements(By.ID, "ali")
 
 logo_we = WebDriverWait(driver2, 10).until(
    EC.presence_of_element_located(

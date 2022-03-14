@@ -1,8 +1,14 @@
+import logging
 from selenium.webdriver.common.keys import Keys
 import captcha
 import time
 from selenium.webdriver.common.action_chains import ActionChains
 from my_tools import get_str_date
+
+import pandas as pd
+from Karar import Karar
+
+from MSSQL import MSSQL
 
 
 from Driver import Driver
@@ -49,14 +55,41 @@ def download_data(start_date, end_date):
    time.sleep(3)
 
 
-   print("1\n")
-
- 
-
    count_element = driver1.driver.execute_script("return document.getElementById(\"aramaForm:sonucTable_data\").childElementCount")
    
-   
-   print("1.5\n")
-   
-   driver1.data_ri_click(0)
+
+   for i in range(0, count_element):
+
+      
+      try:
+         driver1.data_ri_click(i)
+      except:
+         logging.error(str(i) + ". satıra tıklanamadı!")
+      else:
+         time.sleep(1)
+         try:
+            icerik = driver1.copy_karar_icerik_panel()
+         except BaseException as err:
+            logging.error("data_ri_click("+str(i)+") tıklama başarılı ancak kopyalama başarısız\n" + err)
+         else:
+
+            print(icerik.get_attribute("innerHTML") + "\nBİTTİ\n\n")
+
+            daire
+            tarih
+            kararYil
+            kararNo
+            esasYil
+            esasNo
+            mahkemesi
+            metin = icerik.get_attribute("innerHTML")
+
+            karar = Karar("w", "11/11/2021", 2021, 123, 2022, 124, "nn", metin)
+            mssql = MSSQL()
+      
+      if i == 0:
+         break
+         
+
+
    print("2\n")
