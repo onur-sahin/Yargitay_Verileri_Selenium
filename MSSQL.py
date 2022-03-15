@@ -52,8 +52,9 @@ class MSSQL:
          karar.esasNo  = int(karar.esasNo)
          karar.kararYil= int(karar.kararYil)
          karar.kararNo = int(karar.kararNo)
-         #karar.tarih   = date(karar.tarih)
 
+         karar.tarih   = time.strptime (karar.tarih, '%d.%m.%Y')
+         k_tarih_str   = str(karar.tarih.tm_year) + "." +str(karar.tarih.tm_mon) + "." + str(karar.tarih.tm_mday)
 
          sonuc = self.cursor.execute('''INSERT INTO yargitayKararlari.dbo.tbl_karar
                                              (daire,
@@ -70,7 +71,7 @@ class MSSQL:
                                              karar.esasNo,
                                              karar.kararYil,
                                              karar.kararNo,
-                                             karar.tarih,
+                                             k_tarih_str,
                                              id_mahkeme,
                                              karar.metin
                                              )        )
@@ -92,7 +93,9 @@ class MSSQL:
          return result
 
    def isThereMahkemesi(self, mahkemesi):
+      
       result = self.cursor.execute("SELECT id_mahkeme FROM yargitayKararlari.dbo.tbl_mahkemesi WHERE mahkeme_ismi = ? ", (mahkemesi))
+
       try:
          result = result.fetchall()[0][0] #integer döner
       except:
@@ -130,14 +133,15 @@ class MSSQL:
 
    def insertMahkeme(self, mahkemeName):
 
-      if(self.isThereDaire(mahkemeName) != NULL):
+      if(self.isThereMahkemesi(mahkemeName) != NULL):
+         logging.warning("varolan bri mahkeme kaydedilmeye çalışıldı")
          return NULL
          
       result = self.cursor.execute("INSERT INTO yargitayKararlari.dbo.tbl_mahkemesi(mahkeme_ismi) VALUES(?);", (mahkemeName) )
       self.conn.commit()
       time.sleep(1)
 
-      result = self.isThereDaire(mahkemeName)
+      result = self.isThereMahkemesi(mahkemeName)
 
       if(result == NULL):
          return NULL

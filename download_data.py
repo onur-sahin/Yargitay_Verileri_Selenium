@@ -5,7 +5,7 @@ import captcha
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
-from my_tools import get_mahkemesi, get_no, get_str_date, get_yil
+from my_tools import get_mahkemesi, get_no, get_str_date, get_yil, hata
 
 import pandas as pd
 from Karar import Karar
@@ -54,8 +54,11 @@ def download_data(start_date, end_date):
    driver1.get_search_we().location_once_scrolled_into_view
    driver1.get_search_we().send_keys(Keys.RETURN)
 
-   time.sleep(3)
-
+   #time.sleep(3)
+   try:
+      driver1.is_there_sonucTable_head()
+   except:
+      hata()
 
    count_element = driver1.driver.execute_script("return document.getElementById(\"aramaForm:sonucTable_data\").childElementCount")
    
@@ -69,8 +72,8 @@ def download_data(start_date, end_date):
       daire    = data_ri[1].text
 
       esas     = data_ri[2].text
-      esasNo   = get_yil(esas)
-      esasYil  = get_no(esas)
+      esasNo   = get_no(esas)
+      esasYil  = get_yil(esas)
       
       karar    = data_ri[3].text
       kararNo  = get_no(karar)
@@ -83,7 +86,7 @@ def download_data(start_date, end_date):
       except:
          logging.error(str(i) + ". satıra tıklanamadı!")
       else:
-         time.sleep(1)
+         #time.sleep(1)
          try:
             icerik = driver1.copy_karar_icerik_panel()
          except BaseException as err:
@@ -93,10 +96,9 @@ def download_data(start_date, end_date):
             metin = icerik.get_attribute("innerHTML")
 
             mahkemesi = get_mahkemesi(metin)
-         
+            print("bura2" + mahkemesi + "\n")
             karar = Karar(daire, k_tarih, kararYil, kararNo, esasYil, esasNo, mahkemesi, metin)
 
-            print()
             mssql = MSSQL()
             karar.karar_print()
             mssql.save(karar)

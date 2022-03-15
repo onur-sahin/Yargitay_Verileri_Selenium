@@ -143,6 +143,14 @@ class Driver:
          )
       )
       return self.search_we
+      
+   def is_there_sonucTable_head(self):
+      result = WebDriverWait(self.driver, 10).until(
+         EC.presence_of_element_located(
+            (By.CSS_SELECTOR, "thead[id='aramaForm:sonucTable_head']")
+         )
+      )
+      return result
 
    def get_data_ri_we(self, no):
       self.get_data_ri_we = WebDriverWait(self.driver, 10).until(

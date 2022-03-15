@@ -14,7 +14,7 @@ class Karar:
 
    def __init__(self, daire, tarih, kararYil, kararNo, esasYil, esasNo, mahkemesi, metin):
       self.id = -1
-      self.daire =daire
+      self.daire = daire
       self.tarih = tarih
       self.kararYil = kararYil
       self.kararNo = kararNo
@@ -29,7 +29,7 @@ class Karar:
             "daire    = ", self.daire, "\n",
             "tarih    = ", self.tarih, "\n",
             "kararYil = ", self.kararYil, "\n",
-            "kararNo  = ", self.karNo, "\n",
+            "kararNo  = ", self.kararNo, "\n",
             "esasYil  = ", self.esasYil, "\n",
             "esasNo   = ", self.esasNo, "\n",
             "mahkemesi= ", self.mahkemesi, "\n",

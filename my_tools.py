@@ -1,4 +1,11 @@
 from asyncio.windows_events import NULL
+import logging
+import time
+from pythonping import ping
+import winsound
+from threading import Thread
+from copy import deepcopy
+
 import datetime
 import locale
 locale.setlocale(locale.LC_ALL, 'tr_TR.utf8')
@@ -21,7 +28,7 @@ def get_str_date(x_date):
    else:
       x_month = str(x_month)
    
-   print("date:" + x_day+'/'+x_month+'/'+x_year)
+   #print("date:" + x_day+'/'+x_month+'/'+x_year)
 
    return x_day+'/'+x_month+'/'+x_year
 
@@ -37,7 +44,9 @@ def get_mahkemesi(metin):
    array1 = str.lower("mahkemesi")
 
    array_lower = [i for i in metin]
-   array_upper = array_lower
+
+
+   array_upper = deepcopy(array_lower) 
    
    for i in enumerate(array_lower):
       
@@ -49,6 +58,16 @@ def get_mahkemesi(metin):
          array_lower[i[0]] = array_lower[i[0]] + " "
          array_upper[i[0]] = array_upper[i[0]] + " "
 
+      if(i[1] == '\t'):
+         array_lower[i[0]] = " " + array_lower[i[0]] + " "
+         array_upper[i[0]] = " " + array_upper[i[0]] + " "
+
+      if(i[1] == "I"):
+         array_lower[i[0]] = "ı"
+
+      if(i[1] == "İ"):
+         array_lower[i[0]] = "i"
+
       # if(i[1] == "'"):
       #    array_lower[i[0]] = " "
 
@@ -58,20 +77,16 @@ def get_mahkemesi(metin):
       # if(i[1] == "\\"):
       #    array_lower[i[0]] = " "
 
-      if(i[1] == "I"):
-         array_lower[i[0]] = "ı"
 
-      if(i[1] == "İ"):
-         array_lower[i[0]] = "i"
-
-
-   array_lower = "".join(map(str, array_lower) )
-   array_upper = "".join(map(str, array_upper) )
+   array_lower = "".join(array_lower)
+   array_upper = "".join(array_upper)
 
    array_lower = str.lower(array_lower)
 
    list_lower = array_lower.split(" ")
    list_upper = array_upper.split(" ")
+
+
   
    bool_array = compare_chararrays(array1, list_lower , "==", True )
 
@@ -92,7 +107,204 @@ def get_mahkemesi(metin):
          if(i[0] == ":"):
             i = i[1:]
 
+      if (len(i) != 0):
+         if(i[0] == '\t'):
+            i = i[1:]
+
       if(i != "<br>"):
          mahkemesi.append(i)
+
       else:
-         return " ".join(mahkemesi)
+         mahkemesi = " ".join(mahkemesi)
+         print("bura1" + mahkemesi + "\n")
+         return mahkemesi
+
+
+
+
+
+
+def control_panel( hata=""):
+
+   x = [-1]
+
+   if(len(hata) != 0):
+      print(hata)
+
+
+
+   while(True):
+
+      
+
+      if(x[0] == -1):
+         print("\n sessize almak için 's' tuşuna basınız:")
+
+      thread_warning = Thread(target = warning, args = (x, 1000, ) )
+      therad_input_x = Thread(target = input_x, args=(x, ) )
+      thread_warning.start()
+      therad_input_x.start()
+
+      while(thread_warning.is_alive()):
+         pass
+
+      break
+      
+
+
+   while(True):
+      
+      print('''seçiniz:
+               evaluate :e
+               resume   :r
+               quit     :q''')
+
+      x[0] = input()
+
+      if(x[0] == "e"):
+         print("input your codes:\n")
+         code = input()
+         eval(code)
+
+      if(x[0] == "r"):
+         break
+
+def ping_cite():
+
+   response_list = ping('212.175.130.131', size=40, count=10)
+
+   if(response_list.packet_loss < 0.5):
+      return True
+   else:
+      return False
+
+   
+def hata():
+
+   todo = ""
+
+   sleep_time = [30, 90, 200, 600]
+
+   i = 0
+
+   while(True):
+      
+      result = ping_cite()
+      if(result == True):
+         todo = resume()
+         break
+
+      else:
+         time.sleep(sleep_time[i])
+         i += 1
+         result = ping_cite()
+
+      if(i == 4):
+         logging.error("internet problemi")
+         control_panel("internet problemi")
+
+
+
+def resume():
+   return 0
+
+#########################################################
+def warning( x, seconds=1000, duration=2000):
+
+   i = seconds
+   
+   while( i >= 0 ):
+      if(x[0] != "s"):
+         frequency = 2500  # Set Frequency To 2500 Hertz
+         # Set Duration To 1000 ms == 1 second
+         winsound.Beep(frequency, duration)
+         i -= 1
+      else:
+         break
+
+
+def input_x( x ):
+
+   while(True):
+      if(x[0] == "s" or x[0] == "S"):
+
+         break
+      else:
+         x[0] = input()
+
+
+
+def convert_all_uppercase(metin):
+
+   list = [i for i in metin]
+
+   for i in enumerate(list):
+
+      if(len(i[1]) == 0):
+         continue
+
+      elif( i[1] == "i"):
+         list[i[0]] = "İ"
+
+      elif( i[1] == "ı"):
+         list[i[0]] = "I"
+
+      else:
+         list[i[0]] = str.capitalize(i[1])
+      
+
+   return "".join(list)
+
+
+def   convert_all_lowercase(metin):
+   list = [i for i in metin]
+
+   for i in enumerate(list):
+
+      if(len(i[1]) == 0):
+         continue
+
+      elif( i[1] == "İ"):
+         list[i[0]] = "i"
+
+      elif( i[1] == "I"):
+         list[i[0]] = "ı"
+
+      else:
+         list[i[0]] = str.lower(i[1])
+      
+
+   return "".join(list)
+
+
+def   convert_title(metin):
+   list_1 = [i for i in metin]
+
+   for i in enumerate(list_1):
+
+      if(len(i[1]) == 0):
+         continue
+
+      if(i[1] =='\t' ):
+         list_1[i[0]] = " " + '\t' + " "
+
+   list = "".join(list_1)
+
+   list = list.split(" ")
+
+   for i in enumerate(list):
+
+      if(len(i[1]) == 0):
+         continue
+
+      elif( i[1][0] == "i"):
+         list[i[0]] = "İ" + list[i[0]][1:]
+
+      elif( i[1][0] == "ı"):
+         list[i[0]] = "I" + list[i[0]][1:]
+
+      else:
+         list[i[0]] = str.upper(list[i[0]][0]) + list[i[0]][1:]
+      
+
+   return " ".join(list) 

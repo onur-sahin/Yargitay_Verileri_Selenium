@@ -1,12 +1,20 @@
-from datetime import date
-from xmlrpc.client import boolean
-from numpy import compare_chararrays, ndarray
-import numpy
-from my_tools import get_no, get_yil
+
+import copy
+from asyncio import Event
+from distutils.util import convert_path
+import signal
+from threading import Thread
+import time
+import winsound
+
+from my_tools import convert_all_lowercase, convert_all_uppercase, convert_title
+cumle = " iıİI ahmed	vel ve ayşem <br>"
+kelime = [i for i in " iıİI ahmed	vel ve ayşem <br>"]
+
+cumle = convert_title(cumle)
 
 
-tarih = "5/5/2021"
 
-print(date(tarih))
+print(cumle)
 
 
