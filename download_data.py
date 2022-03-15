@@ -1,9 +1,11 @@
 import logging
+from numpy import compare_chararrays
 from selenium.webdriver.common.keys import Keys
 import captcha
 import time
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
-from my_tools import get_str_date
+from my_tools import get_mahkemesi, get_no, get_str_date, get_yil
 
 import pandas as pd
 from Karar import Karar
@@ -60,6 +62,21 @@ def download_data(start_date, end_date):
 
    for i in range(0, count_element):
 
+
+      data_ri = driver1.get_data_ri_we(i).find_elements(By.CSS_SELECTOR, "td[role='gridcell']")
+
+      sira     = data_ri[0].text
+      daire    = data_ri[1].text
+
+      esas     = data_ri[2].text
+      esasNo   = get_yil(esas)
+      esasYil  = get_no(esas)
+      
+      karar    = data_ri[3].text
+      kararNo  = get_no(karar)
+      kararYil = get_yil(karar)
+      k_tarih  = data_ri[4].text
+
       
       try:
          driver1.data_ri_click(i)
@@ -73,19 +90,16 @@ def download_data(start_date, end_date):
             logging.error("data_ri_click("+str(i)+") tıklama başarılı ancak kopyalama başarısız\n" + err)
          else:
 
-            print(icerik.get_attribute("innerHTML") + "\nBİTTİ\n\n")
-
-            daire
-            tarih
-            kararYil
-            kararNo
-            esasYil
-            esasNo
-            mahkemesi
             metin = icerik.get_attribute("innerHTML")
 
-            karar = Karar("w", "11/11/2021", 2021, 123, 2022, 124, "nn", metin)
+            mahkemesi = get_mahkemesi(metin)
+         
+            karar = Karar(daire, k_tarih, kararYil, kararNo, esasYil, esasNo, mahkemesi, metin)
+
+            print()
             mssql = MSSQL()
+            karar.karar_print()
+            mssql.save(karar)
       
       if i == 0:
          break

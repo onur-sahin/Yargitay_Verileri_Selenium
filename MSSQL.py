@@ -1,4 +1,5 @@
 from asyncio.windows_events import NULL
+from datetime import date
 import logging
 import time
 from Karar import Karar
@@ -46,6 +47,13 @@ class MSSQL:
          if(sonuc != NULL):
             logging.warning("kayıtlı bir karar kaydedilmeye çalışıldı")
             return True
+
+         karar.esasYil = int(karar.esasYil)
+         karar.esasNo  = int(karar.esasNo)
+         karar.kararYil= int(karar.kararYil)
+         karar.kararNo = int(karar.kararNo)
+         #karar.tarih   = date(karar.tarih)
+
 
          sonuc = self.cursor.execute('''INSERT INTO yargitayKararlari.dbo.tbl_karar
                                              (daire,
