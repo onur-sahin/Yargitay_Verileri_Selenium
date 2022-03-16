@@ -14,21 +14,14 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 import time
 
+from my_tools import check_ping, control_panel
+
 class Driver:
 
-   
-
    def __init__(self, url):
+
       self.url = url
 
-      self.driver = webdriver.Firefox(
-         service=Service(
-            GeckoDriverManager().install()
-         )
-      )
-
-      self.driver.get(url)
-      
       # self.detayli_arama_we = WebDriverWait(self.driver, 10).until(
       #    EC.presence_of_element_located(
       #       (By.ID, "aramaForm:detayliAramaLabel")
@@ -48,6 +41,75 @@ class Driver:
       # self.tarih_son_we = self.driver.find_element(By.ID, "aramaForm:sonTarih_input")
 
       # self.search_we = self.driver.find_element(By.ID, "aramaForm:detayliAraCommandButton")
+
+
+   def connect_driver(self):
+
+      error_count = 0
+
+      while(True):
+
+         try:
+
+            self.driver = webdriver.Firefox(
+               service=Service(
+                  GeckoDriverManager().install()
+               )
+            )
+
+            self.driver.get(self.url)
+
+         except BaseException as err:
+
+            error_count += 1
+
+            logging.warning("driver'a bağlantıda hata!: " + str(error_count) + ". defadır bağlanmaya çalışılıyor" + str(err) )
+
+            time.sleep(5)
+            
+
+            if(error_count == 5):
+
+               ping_status = check_ping()
+
+               if(ping_status == False):
+
+                  logging.error("driver'a bağlantıda hata!: ping denemeleri başarısız" + str(error_count) + ". defadır bağlanmaya çalışılıyor" + str(err) )
+
+                  x = control_panel(str(err))
+
+                  if(x == "quit"):
+                     return "quit"
+
+                  elif(x == "resume"):
+                     error_count = 0
+                     continue
+
+               elif(ping_status == True):
+                  continue
+            
+            elif(error_count > 5):
+
+               x = control_panel( str(err) )
+
+               if(x == "quit"):
+                  return "quit"
+
+               elif(x == "resume"):
+                  error_count = 0
+                  continue
+
+               
+
+         else:
+            return True
+
+
+   def driver_close(self):
+      try:
+         self.driver.close()
+      except:
+         pass
 
    def get_we(self, type, str, element, element_type):
 
@@ -72,29 +134,29 @@ class Driver:
       return self.get_we
 
    
-   def get_logo(self):
+   # def get_logo(self):
       
-      self.get_logo = WebDriverWait(self.driver, 10).until(
-         EC.presence_of_element_located(
-            (By.CSS_SELECTOR, "img[class='img-responsive logo']")
+   #    self.get_logo = WebDriverWait(self.driver, 10).until(
+   #       EC.presence_of_element_located(
+   #          (By.CSS_SELECTOR, "img[class='img-responsive logo']")
+   #       )
+   #    )
+   #    return self.get_logo
+
+   try:
+   
+
+      def get_detayli_arama_we(self):
+
+         self.detayli_arama_we = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(
+               (By.CSS_SELECTOR, "span[id='aramaForm:detayliAramaLabel'")
+            )
          )
-      )
-      return self.get_logo
+         return self.detayli_arama_we
 
-
-
-   def get_detayli_arama_we(self):
-      # self.detayli_arama_we = WebDriverWait(self.driver, 10).until(
-      #    EC.presence_of_element_located(
-      #       (By.ID, "aramaForm:detayliAramaLabel")
-      #    )
-      # )
-      self.detayli_arama_we = WebDriverWait(self.driver, 10).until(
-         EC.presence_of_element_located(
-            (By.CSS_SELECTOR, "span[id='aramaForm:detayliAramaLabel'")
-         )
-      )
-      return self.detayli_arama_we
+   except:
+      pass
 
    def get_captcha_input_we(self):
       self.captcha_input_we = WebDriverWait(self.driver, 10).until(
@@ -105,12 +167,27 @@ class Driver:
       return self.captcha_input_we
 
    def get_cptImg_we(self):
-      self.cptImg_we = WebDriverWait(self.driver, 10).until(
-         EC.presence_of_element_located(
-            (By.CSS_SELECTOR, "img[id='aramaForm:cptImg']")
+
+      try:
+         self.cptImg_we = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(
+               (By.CSS_SELECTOR, "img[id='aramaForm:cptImg']")
+            )
          )
-      )
-      return self.cptImg_we
+
+         return self.cptImg_we
+
+      except BaseException as err:
+
+         logging.warning("get_cptImg_we() fonksiyonunda hata!: " + str(err) )
+
+         ping_result = check_ping()
+
+         if(ping_result == True):
+
+
+         elif(ping_result == )
+
 
    def get_karar_yili_we(self):
       self.karar_yili_we = WebDriverWait(self.driver, 10).until(
@@ -145,12 +222,14 @@ class Driver:
       return self.search_we
       
    def is_there_sonucTable_head(self):
+      
       result = WebDriverWait(self.driver, 10).until(
          EC.presence_of_element_located(
             (By.CSS_SELECTOR, "thead[id='aramaForm:sonucTable_head']")
          )
       )
       return result
+         
 
    def get_data_ri_we(self, no):
       self.get_data_ri_we = WebDriverWait(self.driver, 10).until(
@@ -180,6 +259,16 @@ class Driver:
 
       #"button[id='aramaForm:sonucTable:" + str(no) + ":rowbtn'"
 
+
+   def get_radio_button_karar_we(self):
+      self.radio_button_karar = WebDriverWait(self.driver, 10).until(
+         EC.presence_of_element_located(
+            (By.CSS_SELECTOR, "table[id='aramaForm:siralamaKriteri']")
+         )
+      )
+
+      return self.get_radio_button_karar_we
+
    def data_ri_click(self, no):
       try:
          self.driver.execute_script("document.getElementById(\"aramaForm:sonucTable:" + str(no) + ":rowbtn\").click();")
@@ -203,6 +292,32 @@ class Driver:
          return NULL
       else:
          return self.get_karar_icerik_panel_we
+
+   def is_there_message(self):
+      try:
+         result = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(
+               (By.CSS_SELECTOR, "div[id='aramaForm:messages']")
+            )
+         )
+      except:
+         return NULL
+
+      else:
+         try:
+            result_message = WebDriverWait(self.driver, 10).until(
+               EC.presence_of_element_located(
+                  (By.CSS_SELECTOR, "span[class='ui-messages-info-summary']")
+               )
+            )
+         except:
+            return "message could not be read"
+         
+         else:
+            return result_message.text
+
+
+
 
 
    def copy_karar_icerik_panel(self):

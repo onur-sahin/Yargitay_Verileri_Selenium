@@ -1,11 +1,16 @@
 from asyncio.windows_events import NULL
 from datetime import date
+from distutils.log import error
 import logging
+from posixpath import curdir
 import time
 from Karar import Karar
 
 import pandas as pd #veriyi düzenlemek için
-import pyodbc       #MSSQL e bağlanmak için gerekli olam modül
+import pyodbc#MSSQL e bağlanmak için gerekli olam modül
+
+from my_tools import control_panel, convert_all_uppercase, convert_title  
+
 
 class MSSQL:
 
@@ -15,17 +20,118 @@ class MSSQL:
       self.databaseName = "yargitayKararlari"
       self.Trusted_Connection = "yes"
 
-      self.conn = pyodbc.connect('Driver={SQL Server};'
-                     'Server='   + self.serverName   + ';'
-                     'Database=' + self.databaseName + ';'
-                     'Trusted_Connection=' + self.Trusted_Connection + ';')
-
-      self.cursor = self.conn.cursor()
-
       # sql_query = pd.read_sql_query('SELECT * FROM yargitayKararlari.dbo.tbl_karar', self.conn)
 
       # print(sql_query)
       # print(type(sql_query))
+
+   def mssql_close(self):
+
+      try:
+         self.cursor.close()
+      except:
+         pass
+
+      try:
+         self.conn.close()
+      except:
+         pass
+
+
+   def mssql_connect(self):
+
+      error_count = 0
+
+      while(True):
+
+         try:
+
+            self.conn = pyodbc.connect('Driver={SQL Server};'
+                           'Server='   + self.serverName   + ';'
+                           'Database=' + self.databaseName + ';'
+                           'Trusted_Connection=' + self.Trusted_Connection + ';')
+
+            self.cursor = self.conn.cursor()
+
+         except BaseException as err:
+
+            logging.warning("mssql'e bağlantıda hata" + str(error_count) + ". defa bağlanmaya çalışılıyor:" + str(err))
+            
+            time.sleep(5)
+            
+            error_count += 1
+            
+            logging.error("mssql 'bağlantıda hata!: " + str(err))
+
+            if(error_count == 5):
+
+               x = control_panel()
+
+               if(x == "quit"):
+                  return "quit"
+
+               elif(x == "resume"):
+                  error_count = 0
+                  continue
+
+         else:
+
+            return True
+         
+
+   def last_karar(self, year):
+
+      error_count = 0
+
+      while(True):
+
+         query_text = 'SELECT TOP 1 *  FROM tbl_karar WHERE karar_yil={} ORDER BY karar_no DESC'.format(year)
+
+         try:
+            result = self.cursor.execute( query_text )
+
+         except BaseException as err:
+
+            logging.warning("mssql last_karar() fonksiyonunda hata!" + str(error_count) + ". deneme: " + str(err) )
+
+            error_count += 1
+
+            time.sleep(5)
+
+            if(error_count == 5):
+
+               logging.error("last_karar(self) fonksiyonunda hata!: " + str(err))
+
+               self.mssql_close()
+
+               mssql_connection_status = self.mssql_connect()
+
+               if( mssql_connection_status == True):
+                  continue
+
+               elif(mssql_connection_status == "quit"):
+                  return "quit"
+
+            elif(error_count == 6):
+
+               x = control_panel()
+
+               if(x == "resume"):
+                  
+                  error_count = 0
+                  continue
+
+               elif(x == "quit"):
+                  return "quit"
+
+
+         else:
+
+            if ( result.rowcount == 0 ) :
+               return NULL
+
+            return result.__next__()[5] #karar no sütunu
+
 
    def save(self, karar):
       self.karar = karar
@@ -84,7 +190,15 @@ class MSSQL:
          return False
 
    def isThereDaire(self, daireName):
-      result = self.cursor.execute("SELECT id_daire FROM yargitayKararlari.dbo.tbl_daire WHERE daire_ismi = ?", (daireName))
+      try:
+         result = self.cursor.execute("SELECT id_daire FROM yargitayKararlari.dbo.tbl_daire WHERE daire_ismi = ?", (  convert_title(daireName)   )   )
+      except BaseException as err:
+         logging.error("isThereDaire() fonksiyonu mssql query hatası!:" + str(err))
+
+         ##################################x
+         #buraya hata ile ilgili kurtarma yazılacak
+
+
       try:
          result = result.fetchall()[0][0] #integer döner
       except:
@@ -93,8 +207,8 @@ class MSSQL:
          return result
 
    def isThereMahkemesi(self, mahkemesi):
-      
-      result = self.cursor.execute("SELECT id_mahkeme FROM yargitayKararlari.dbo.tbl_mahkemesi WHERE mahkeme_ismi = ? ", (mahkemesi))
+
+      result = self.cursor.execute("SELECT id_mahkeme FROM yargitayKararlari.dbo.tbl_mahkemesi WHERE mahkeme_ismi = ? ", (convert_all_uppercase(mahkemesi)))
 
       try:
          result = result.fetchall()[0][0] #integer döner

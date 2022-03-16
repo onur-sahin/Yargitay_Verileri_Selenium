@@ -6,18 +6,28 @@ import captcha
 import datetime
 import time
 
-
-
 setup_logging()
 
 captcha.create_img_folder()
 
-start = datetime.datetime(2021, 12, 11)
+start = datetime.datetime(2021, 12, 16)
 end = datetime.datetime(2021, 12, 17)
 
-download_data(start, end)
+year = 2021
 
-time.sleep(1200)
+while(True):
+
+   status = download_data(year, start_esasNo=-1, end_kararNo=-1)
+
+   if(status == "q"):
+      break
+
+   elif(status == "error"):
+      break
+
+   
+
+time.sleep(120)
 
 
 

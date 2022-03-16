@@ -131,8 +131,6 @@ def control_panel( hata=""):
    if(len(hata) != 0):
       print(hata)
 
-
-
    while(True):
 
       
@@ -166,8 +164,11 @@ def control_panel( hata=""):
          code = input()
          eval(code)
 
-      if(x[0] == "r"):
-         break
+      elif(x[0] == "r"):
+         return "resume"
+
+      elif(x[0] == "q"):
+         return "quit"
 
 def ping_cite():
 
@@ -178,35 +179,52 @@ def ping_cite():
    else:
       return False
 
-   
-def hata():
 
-   todo = ""
+def check_ping():
 
-   sleep_time = [30, 90, 200, 600]
+   sleep_time = [15, 15, 15, 15, 30, 30, 60, 60, 60, 60, 60, 60, 60, 60]
 
    i = 0
+   count = 0
 
    while(True):
+
+      count += 0
+      
+      logging.warning("ping atma problemi yaşanıyor " + str(count) + ". ping denemesi yapılıyor")
       
       result = ping_cite()
+
       if(result == True):
-         todo = resume()
-         break
+         return True
 
       else:
          time.sleep(sleep_time[i])
          i += 1
          result = ping_cite()
 
-      if(i == 4):
+      if( i == sleep_time.__len__() ):
          logging.error("internet problemi")
-         control_panel("internet problemi")
+         x = control_panel()
+
+         if( x == 'resume'):
+            i = 0
+            count = 0
+            continue
+
+         elif(x == "quit"):
+            return "quit"
+
+            
 
 
 
-def resume():
-   return 0
+
+
+   
+
+
+
 
 #########################################################
 def warning( x, seconds=1000, duration=2000):
