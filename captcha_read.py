@@ -5,27 +5,66 @@ from captcha_solver import CaptchaSolver
 from captcha_solver.error import (SolutionNotReady, SolutionTimeoutError,
                     ServiceTooBusy, InvalidServiceBackend)
 
+from my_tools import check_ping, control_panel
+
 
 def captcha_read(image_no):
 
-   try:
+   error_count = 0
 
-      solver = CaptchaSolver('antigate', api_key='c8c5d34dcdfb5b93415f58b88a1e630c')
-      raw_data = open("captcha_images/"+ str(image_no) + ".png",  'rb').read()
-      result = solver.solve_captcha(raw_data, submiting_time=120)
+   while(True):
 
-      return result
+      try:
 
-   except SolutionTimeoutError as err:
-      logging.error("\ncaptha_read() fonksiyonunda hata!:" + str(err))
-      return NULL
+         solver = CaptchaSolver('antigate', api_key='c8c5d34dcdfb5b93415f58b88a1e630c')
+         raw_data = open("captcha_images/"+ str(image_no) + ".png",  'rb').read()
+         result = solver.solve_captcha(raw_data, submiting_time=120)
 
-   except InvalidServiceBackend as err:
-      logging.error("\ncaptha_read() fonksiyonunda hata!:" + str(err))
-      return NULL
+         return result
 
-   except BaseException as err:
-      logging.error("\ncaptha_read() fonksiyonunda bilinmeyen bir hata!:" + str(err))
-      return NULL
+      except SolutionTimeoutError as err:
+
+         error_count += 1
+
+         logging.error("\ncaptha_read() fonksiyonunda hata!:" + str(err))
+         
+
+
+      except InvalidServiceBackend as err:
+
+         error_count += 1
+
+         logging.error("\ncaptha_read() fonksiyonunda hata!:" + str(err))
+
+      except BaseException as err:
+
+         error_count += 1
+
+         logging.error("\ncaptha_read() fonksiyonunda bilinmeyen bir hata!:" + str(err))
+
+
+      finally:
+
+         if(error_count == 5):
+
+            check_ping()
+            continue
+
+         elif(error_count == 6):
+            return "restart"
+
+         elif(error_count >= 7):
+            x = control_panel()
+
+            if( x == "quit"):
+               return "quit"
+               
+            elif(x == "resume"):
+               error_count == 0
+               continue
+
+
+
+            
 
 

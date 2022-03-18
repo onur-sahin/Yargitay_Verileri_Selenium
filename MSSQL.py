@@ -14,7 +14,7 @@ from my_tools import control_panel, convert_all_uppercase, convert_title
 
 class MSSQL:
 
-   def __init__(self):
+   def __init__(self, restartCount):
       
       self.serverName = "DESKTOP-KCCOUBH\SQLEXPRESS"
       self.databaseName = "yargitayKararlari"
@@ -55,15 +55,9 @@ class MSSQL:
 
          except BaseException as err:
 
-            logging.warning("mssql'e bağlantıda hata" + str(error_count) + ". defa bağlanmaya çalışılıyor:" + str(err))
-            
-            time.sleep(5)
-            
-            error_count += 1
-            
-            logging.error("mssql 'bağlantıda hata!: " + str(err))
+            if( self.restartCount[0] == 1 ):
 
-            if(error_count == 5):
+               error_count += 1
 
                x = control_panel()
 
@@ -73,6 +67,21 @@ class MSSQL:
                elif(x == "resume"):
                   error_count = 0
                   continue
+
+            if(error_count == 5):
+
+               self.restartCount[0] = 1
+
+               return "restart"
+
+
+            logging.warning("mssql'e bağlantıda hata" + str(error_count) + ". defa bağlanmaya çalışılıyor:" + str(err))
+            
+            logging.error("mssql 'bağlantıda hata!: " + str(err))
+
+            time.sleep(5)
+
+
 
          else:
 
@@ -112,7 +121,10 @@ class MSSQL:
                elif(mssql_connection_status == "quit"):
                   return "quit"
 
-            elif(error_count == 6):
+               elif(mssql_connection_status == "restart"):
+                  return "restart"
+
+            elif(error_count >= 6):
 
                x = control_panel()
 
@@ -124,16 +136,22 @@ class MSSQL:
                elif(x == "quit"):
                   return "quit"
 
+               elif(x == "restart"):
+                  return "restart"
 
-         else:
+
+         else: # try except 'in else 'i
 
             if ( result.rowcount == 0 ) :
-               return NULL
+               return 0
 
-            return result.__next__()[5] #karar no sütunu
+            return result.__next__()[5] #[5]karar_no sütunu ve sorgudan max'simum
+                                        #tek satır dönmekte
+                                        
 
 
    def save(self, karar):
+
       self.karar = karar
 
       id_daire = self.isThereDaire( karar.daire)
@@ -190,6 +208,7 @@ class MSSQL:
          return False
 
    def isThereDaire(self, daireName):
+      
       try:
          result = self.cursor.execute("SELECT id_daire FROM yargitayKararlari.dbo.tbl_daire WHERE daire_ismi = ?", (  convert_title(daireName)   )   )
       except BaseException as err:

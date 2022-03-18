@@ -59,6 +59,8 @@ def did_img_refresh():
 
    last_image_number =  get_last_img_number()
 
+   
+
    if(last_image_number == 0):
       return True #yani şu an kayıtlı resim yok browser daki resmi kaydedecek
 
@@ -66,55 +68,113 @@ def did_img_refresh():
 
    img2 = get_current_img()
 
+   if(last_image_number == "restart" or img2 == "restart"):
+      return "restart"
+
+   elif(last_image_number == "quit" or img2 == "quit"):
+      return "quit"
+
    if compare(img1, img2):
       return False
 
    else:
       return True
 
+
+# Bu fonksiyon aynı zamanda captcha_image klasörü yoksa 
 def get_last_img_number():
 
-   imgNames = []
+   error_count = 0
 
-   if os.path.exists(imgDir):
+   while(True):
 
-      list = glob(pathAllImages)
+      try:
 
-      if list.__len__() == 0:
-         return 0
+         imgNames = []
 
-      else:
+         if os.path.exists(imgDir):
 
-         for path in list:
-            name = path.split(os.sep)
-            number = int( name[-1].split('.')[0] )
-            imgNames.append(number)
+            list = glob(pathAllImages)
 
-         return max(imgNames)
-   else:
-      create_img_folder()
-      return 0
+            if list.__len__() == 0:
+               return 0
+
+            else:
+
+               for path in list:
+                  name = path.split(os.sep)
+                  number = int( name[-1].split('.')[0] )
+                  imgNames.append(number)
+
+               return max(imgNames)
+         else:
+            create_img_folder()
+            return 0
+
+      except BaseException as err:
+
+         logging.error("get_last_img_number() fonksiyonunda hata" + str(err))
+
+         if(error_count >= 5):
+            x = control_panel(str(err))
+
+            if(x == "resume"):
+
+               error_count = 0
+               continue
+            
+            elif(x == "restart"):
+               return "restart"
+            
+            elif(x == "quit"):
+               return "quit"
+
+
+
+
+         
+
+         
 
 
 def save_current_img(driver1):
 
-   imgName= str( get_last_img_number() + 1 )
+   error_count = 0
 
-   try:
-      with open(imgDir + os.sep + imgName + '.png', 'wb') as file:
-         file.write(driver1.get_cptImg_we().screenshot_as_png)
+   while(True):
 
-   except BaseException as err:
-      logging.error("save_current_img() fonksiyonu dosyaya resmi kaydedemedi hata!: " + str(err))
+      imgName= str( get_last_img_number() + 1 )
 
-      delete_all_images()
-      
+      try:
+         with open(imgDir + os.sep + imgName + '.png', 'wb') as file:
+            file.write(driver1.get_cptImg_we().screenshot_as_png)
+
+      except BaseException as err:
+
+         error_count += 0
+
+         if(error_count == 5):
+
+            logging.error("save_current_img() fonksiyonu dosyaya resmi kaydedemedi hata!: " + str(err))
+
+            delete_all_images()
+
+         elif(error_count >= 6):
+
+            x = control_panel()
+
+            if(x == "resume"):
+               continue
+
+            elif(x == "quit"):
+               exit()
+
+            else:
+               print("save_current_img fonksiyonunda bu seçenekler kullanılamaz\n sadece resume ve quit:")
 
 
-      return False
-
-   else:
-      return True
+      else:
+         return True
 
 
 def get_current_img(driver1):
@@ -127,10 +187,15 @@ def get_current_img(driver1):
          return driver1.get_cptImg_we().screenshot_as_png
 
       except BaseException as err:
+
          error_count += 1
+
          logging.warning("get_current_img() fonksiyonu.screenshot_as_png de hata!: " + str(err) )
 
+
+
          if(error_count == 5):
+
             x = control_panel()
 
             if( x == "quit"):
@@ -139,6 +204,9 @@ def get_current_img(driver1):
             elif(x == "resume"):
                error_count = 0
                continue
+
+            elif(x == "restart"):
+               return "restart"
 
       
 

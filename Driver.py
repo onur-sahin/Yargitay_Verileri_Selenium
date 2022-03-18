@@ -22,25 +22,6 @@ class Driver:
 
       self.url = url
 
-      # self.detayli_arama_we = WebDriverWait(self.driver, 10).until(
-      #    EC.presence_of_element_located(
-      #       (By.ID, "aramaForm:detayliAramaLabel")
-      #    )
-      # )
-      
-      # self.detayli_arama_we.click()
-      
-      # self.captcha_input_we = self.driver.find_element(By.ID, "aramaForm:guvenlikKodu")
-
-      # self.cptImg_we = self.driver.find_element(By.ID, "aramaForm:cptImg")
-
-      # self.karar_yili_we = self.driver.find_element(By.ID, "aramaForm:karaYilInput")
-
-      # self.tarih_bas_we = self.driver.find_element(By.ID, "aramaForm:ilkTarih_input")
-
-      # self.tarih_son_we = self.driver.find_element(By.ID, "aramaForm:sonTarih_input")
-
-      # self.search_we = self.driver.find_element(By.ID, "aramaForm:detayliAraCommandButton")
 
 
    def connect_driver(self):
@@ -57,12 +38,17 @@ class Driver:
                )
             )
 
-            self.driver.get(self.url)
+            browser = self.driver.get(self.url)
 
          except BaseException as err:
 
             error_count += 1
 
+            try:
+               browser.quit()
+            except:
+               pass
+            
             logging.warning("driver'a bağlantıda hata!: " + str(error_count) + ". defadır bağlanmaya çalışılıyor" + str(err) )
 
             time.sleep(5)
@@ -72,23 +58,19 @@ class Driver:
 
                ping_status = check_ping()
 
-               if(ping_status == False):
 
-                  logging.error("driver'a bağlantıda hata!: ping denemeleri başarısız" + str(error_count) + ". defadır bağlanmaya çalışılıyor" + str(err) )
+               if(ping_status == "quit"):
+                  return "quit"
 
-                  x = control_panel(str(err))
+               elif(ping_status == "restart"):
+                  return "restart"
 
-                  if(x == "quit"):
-                     return "quit"
+               #elif( ping_status == "resume"): böyle bir sonuç gelemez
 
-                  elif(x == "resume"):
-                     error_count = 0
-                     continue
-
-               elif(ping_status == True):
-                  continue
-            
-            elif(error_count > 5):
+               elif(ping_status == True): #Eğer ki ping başarılı ise bir kez daha driver'a
+                  continue                #bağlanılmaya çalışılacak. Bu denemede de hata
+                                          #olursa aşağıdaki elif yapısına girecek
+            elif(error_count >= 6):
 
                x = control_panel( str(err) )
 
@@ -99,9 +81,12 @@ class Driver:
                   error_count = 0
                   continue
 
+               elif(x == "restart"):
+                  return "restart"
+
                
 
-         else:
+         else: #try except 'in else 'i 
             return True
 
 
@@ -131,7 +116,7 @@ class Driver:
       
       
       
-      return self.get_we
+         return self.get_we
 
    
    # def get_logo(self):
@@ -143,20 +128,19 @@ class Driver:
    #    )
    #    return self.get_logo
 
-   try:
+   
    
 
-      def get_detayli_arama_we(self):
+   def get_detayli_arama_we(self):
 
-         self.detayli_arama_we = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located(
-               (By.CSS_SELECTOR, "span[id='aramaForm:detayliAramaLabel'")
-            )
+      self.detayli_arama_we = WebDriverWait(self.driver, 10).until(
+         EC.presence_of_element_located(
+            (By.CSS_SELECTOR, "span[id='aramaForm:detayliAramaLabel'")
          )
-         return self.detayli_arama_we
+      )
+      return self.detayli_arama_we
 
-   except:
-      pass
+   
 
    def get_captcha_input_we(self):
       self.captcha_input_we = WebDriverWait(self.driver, 10).until(
@@ -181,12 +165,12 @@ class Driver:
 
          logging.warning("get_cptImg_we() fonksiyonunda hata!: " + str(err) )
 
-         ping_result = check_ping()
+         check_ping()
 
-         if(ping_result == True):
+ 
 
 
-         elif(ping_result == )
+        
 
 
    def get_karar_yili_we(self):
@@ -294,6 +278,7 @@ class Driver:
          return self.get_karar_icerik_panel_we
 
    def is_there_message(self):
+
       try:
          result = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located(
@@ -311,6 +296,8 @@ class Driver:
                )
             )
          except:
+            logging.error("div[id='aramaForm:messages' elementi var ve içeriği: {}".format(result.text))
+
             return "message could not be read"
          
          else:
@@ -321,20 +308,21 @@ class Driver:
 
 
    def copy_karar_icerik_panel(self):
-      try:
+
          #self.copy_karar_icerik_panel = self.driver.execute_script("")
          self.copy_karar_icerik_panel = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located(
                (By.CSS_SELECTOR, "p[align='justify']")
             )
          )
-
-      except:
-         logging.error("copy_karar_icerik_panel() fonksiyonunda hata")
-         return NULL
-
-      else:
+         
          return self.copy_karar_icerik_panel
 
 
+
+   def browser_quit(self):
+      try:
+         self.browser.quit()
+      except:
+         pass
 

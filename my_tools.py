@@ -155,6 +155,7 @@ def control_panel( hata=""):
       print('''seçiniz:
                evaluate :e
                resume   :r
+               restart  :restart
                quit     :q''')
 
       x[0] = input()
@@ -169,6 +170,13 @@ def control_panel( hata=""):
 
       elif(x[0] == "q"):
          return "quit"
+
+      elif(x[0] == "restart"):
+         return "restart"
+      
+      else:
+         print("Geçerli Seçim Yapınız!:")
+         continue
 
 def ping_cite():
 
@@ -201,10 +209,12 @@ def check_ping():
       else:
          time.sleep(sleep_time[i])
          i += 1
-         result = ping_cite()
+      
 
       if( i == sleep_time.__len__() ):
+
          logging.error("internet problemi")
+         
          x = control_panel()
 
          if( x == 'resume'):
@@ -215,7 +225,8 @@ def check_ping():
          elif(x == "quit"):
             return "quit"
 
-            
+         elif( x == "restart"):
+            return "restart"            
 
 
 

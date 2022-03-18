@@ -24,7 +24,14 @@ class Karar:
       self.metin = metin
 
 
-   def karar_print(self):
+   def karar_print(self, metinVisible = True):
+
+      if(metinVisible == False):
+         str = "Metin seçeneği kapalı"
+
+      else:
+         str = self.metin
+
       print("id       = ", self.id, "\n",
             "daire    = ", self.daire, "\n",
             "tarih    = ", self.tarih, "\n",
@@ -33,7 +40,7 @@ class Karar:
             "esasYil  = ", self.esasYil, "\n",
             "esasNo   = ", self.esasNo, "\n",
             "mahkemesi= ", self.mahkemesi, "\n",
-            "metin    = ", self.metin, "\n",
+            "metin    = ", str, "\n",
             )
 
 
