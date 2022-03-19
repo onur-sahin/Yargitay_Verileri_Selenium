@@ -55,7 +55,7 @@ def delete_all_images():
 
 
 
-def did_img_refresh():
+def did_img_refresh(driver):
 
    last_image_number =  get_last_img_number()
 
@@ -66,7 +66,7 @@ def did_img_refresh():
 
    img1 = get_image_path(last_image_number)
 
-   img2 = get_current_img()
+   img2 = get_current_img(driver)
 
    if(last_image_number == "restart" or img2 == "restart"):
       return "restart"
@@ -219,3 +219,6 @@ def get_image_path(number):
 
    else:
       return NULL
+
+
+   

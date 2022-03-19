@@ -20,6 +20,9 @@ class MSSQL:
       self.databaseName = "yargitayKararlari"
       self.Trusted_Connection = "yes"
 
+
+      self.mssql_connect()
+
       # sql_query = pd.read_sql_query('SELECT * FROM yargitayKararlari.dbo.tbl_karar', self.conn)
 
       # print(sql_query)
@@ -52,6 +55,7 @@ class MSSQL:
                            'Trusted_Connection=' + self.Trusted_Connection + ';')
 
             self.cursor = self.conn.cursor()
+            
 
          except BaseException as err:
 
@@ -86,6 +90,14 @@ class MSSQL:
          else:
 
             return True
+
+
+   def mssql_test(self):
+      try:
+         self.cursor.execute("SELECT * FROM yargitayKararlari.dbo.tbl_karar")
+         return True
+      except:
+         return False
          
 
    def last_karar(self, year):
@@ -145,7 +157,7 @@ class MSSQL:
             if ( result.rowcount == 0 ) :
                return 0
 
-            return result.__next__()[5] #[5]karar_no sütunu ve sorgudan max'simum
+            return int( result.__next__()[5] ) #[5]karar_no sütunu ve sorgudan max'simum
                                         #tek satır dönmekte
                                         
 

@@ -1,10 +1,24 @@
-from error_handler import Bol
+from myErrorList import captcha_value_is_not_valid
 
-bol = Bol()
+def fnc(sayi):
 
-bol.bol1(0)
-bol.bol2(10)
-bol.bol3(10)
+   try:
+      
+
+      sonuc = 100/sayi
+   except Exception as err:
+
+         print("birinci hata alındı" + str(err))
 
 
+   else:
+      raise captcha_value_is_not_valid()
+      return sonuc
 
+
+try:
+   print(fnc(10))
+
+except BaseException as err:
+
+   print("ikinci hata dönüşü: " + str(err))

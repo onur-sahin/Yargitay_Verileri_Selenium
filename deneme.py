@@ -1,7 +1,5 @@
-import datetime
+sayi= 11
+str = "kelime"
+url1= "https://karararama.yargitay.gov.tr/YargitayBilgiBankasiIstemciWeb/"
 
-
-start = datetime.datetime(2021, 12, 1)
-end = datetime.datetime(2021, 12, 10)
-
-print((start.year))
+print("bunlar yızıld sayi: {str(sayi)} ve str = {str}".format())

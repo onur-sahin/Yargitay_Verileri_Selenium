@@ -1,12 +1,8 @@
 from asyncio.windows_events import NULL
-from lib2to3.pgen2 import driver
 import logging
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common import actions
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -18,9 +14,10 @@ from my_tools import check_ping, control_panel
 
 class Driver:
 
-   def __init__(self, url):
+   def __init__(self, url, restartCount):
 
       self.url = url
+      self.restartCount = restartCount
 
 
 
@@ -44,10 +41,7 @@ class Driver:
 
             error_count += 1
 
-            try:
-               browser.quit()
-            except:
-               pass
+            self.browser_quit()
             
             logging.warning("driver'a bağlantıda hata!: " + str(error_count) + ". defadır bağlanmaya çalışılıyor" + str(err) )
 
@@ -181,6 +175,35 @@ class Driver:
       )
       return self.karar_yili_we
 
+
+   def get_ilk_karar_no_input_we(self):
+      
+      self.get_ilk_karar_no_input_we = WebDriverWait(self.driver, 10).until(
+         EC.presence_of_element_located(
+            (By.CSS_SELECTOR, "input[id='aramaForm:ilkKararNoInput']")
+         )
+      )
+      return self.get_ilk_karar_no_input_we
+
+   def get_son_karar_no_input_we(self):
+
+      self.get_son_karar_no_input_we = WebDriverWait(self.driver, 10).until(
+         EC.presence_of_element_located(
+            (By.CSS_SELECTOR, "input[id='aramaForm:sonKararNoInput']")
+         )
+      )
+      return self.get_son_karar_no_input_we
+
+   def get_ilk_esas_no_input_we(self):
+
+      self.get_ilk_esas_no_input_we = WebDriverWait(self.driver, 10).until(
+         EC.presence_of_element_located(
+            (By.CSS_SELECTOR, "input[id='aramaForm:ilkEsasNoInput']")
+         )
+      )
+      return self.get_ilk_esas_no_input_we
+
+
    def get_tarih_bas_we(self):
       self.tarih_bas_we = WebDriverWait(self.driver, 10).until(
          EC.presence_of_element_located(
@@ -222,14 +245,41 @@ class Driver:
          )
       )
       return self.get_data_ri_we
+      
 
    def get_data_ri_count(self):
+
       self.get_data_ri_count = WebDriverWait(self.driver, 10).until(
          EC.presence_of_all_elements_located(
-            (By.CSS_SELECTOR, "tr[data-ri*=''")
+            (By.CSS_SELECTOR, "tr[data-ri*='']")
          ).count()
       )
       return self.get_data_ri_count
+
+   def get_data_ri_min_and_max(self, driver1):
+
+      list = []
+      try:
+
+         self.get_data_ri_min_and_max = WebDriverWait(driver1.driver, 60).until(
+            EC.presence_of_all_elements_located(
+               (By.CSS_SELECTOR, "tr[data-ri*='']")
+            )
+         )
+
+      except BaseException as err:
+         print(err)
+
+      # self.get_data_ri_min_and_max = self.driver.execute_script("return document.getElementsByClassName('ui-widget-content normalrow')")
+
+      print(self.get_data_ri_min_and_max.getAttribute("innerHTML"))
+
+      for web_element in self.get_data_ri_min_and_max:
+         list.append(    int(  web_element.getAttribute("data-ri")  )    )
+
+      list.sort()
+
+      return [ list.__getitem__(0), list.pop() ]
 
    def get_data_ri_button_we(self, no):
       self.get_data_ri_we = WebDriverWait(self.driver, 10).until(
@@ -244,18 +294,111 @@ class Driver:
       #"button[id='aramaForm:sonucTable:" + str(no) + ":rowbtn'"
 
 
+   # def get_radio_button_karar_we(self):
+
+   #    self.radio_button_karar_we = WebDriverWait(self.driver, 10).until(
+   #       EC.presence_of_element_located(
+   #          (By.CSS_SELECTOR, "table[id='aramaForm:siralamaKriteri']")
+   #       )
+   #    )
+
+   #    return self.radio_button_karar_we
+
    def get_radio_button_karar_we(self):
-      self.radio_button_karar = WebDriverWait(self.driver, 10).until(
-         EC.presence_of_element_located(
-            (By.CSS_SELECTOR, "table[id='aramaForm:siralamaKriteri']")
+
+      self.radio_button_karar_we = WebDriverWait(self.driver, 10).until(
+         EC.presence_of_all_elements_located(
+            (By.CSS_SELECTOR, "div[class*='ui-radiobutton-box ui-widget ui-corner-all']")
          )
       )
 
-      return self.get_radio_button_karar_we
+      return self.radio_button_karar_we
+
+
+
+   def click_to_last_tab(self):
+
+      i = 0
+
+      while(i <= 5):
+
+         try:
+            self.click_to_last_tab = WebDriverWait(self.driver, 10).until(
+               EC.presence_of_element_located(
+                  (By.CSS_SELECTOR, "a[class='ui-paginator-last ui-state-default ui-corner-all']")
+               )
+            )
+
+            time.sleep(0.1)
+
+            self.click_to_last_tab.click()
+
+            time.sleep(0.1)
+
+            WebDriverWait(self.driver, 10).until(
+               EC.presence_of_element_located(
+                  (By.CSS_SELECTOR, "a[class='ui-paginator-last ui-state-default ui-corner-all ui-state-disabled']")
+               )
+            )
+
+            return True
+
+         except :
+            if(i == 5):
+               return False
+
+   def is_there_previous_tab(self):
+
+      try:
+
+         self.is_there_previous_tab = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(
+               (By.CSS_SELECTOR, "a[class='ui-paginator-prev ui-state-default ui-corner-all ui-state-disabled']")
+            )
+         )
+
+         return False
+
+      except :
+
+         return True
+
+   def click_to_previous_tab(self):
+
+      try:
+         self.is_there_sonucTable_head()
+      except Exception as err:
+         logging.error("click_to_previous_tab de is_there_sonuc_table_head de hata" + str(err))
+
+         return "restart"
+
+      try:
+
+         if(self.is_there_previous_tab() == False):
+            return "finish"
+
+         self.click_to_previous_tab = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(
+               (By.CSS_SELECTOR, "a[class='ui-paginator-prev ui-state-default ui-corner-all']")
+            )
+         )
+
+         self.click_to_previous_tab.click()
+
+         self.is_there_sonucTable_head()
+
+
+         return True
+
+      except :
+
+         return "restart"
+
 
    def data_ri_click(self, no):
       try:
          self.driver.execute_script("document.getElementById(\"aramaForm:sonucTable:" + str(no) + ":rowbtn\").click();")
+         time.sleep(1)
       except:
          logging.error("data_ri_click()" + str(no) +". satirinda hata")
          return False
@@ -310,7 +453,7 @@ class Driver:
    def copy_karar_icerik_panel(self):
 
          #self.copy_karar_icerik_panel = self.driver.execute_script("")
-         self.copy_karar_icerik_panel = WebDriverWait(self.driver, 10).until(
+         self.copy_karar_icerik_panel = WebDriverWait(self.driver, 60).until(
             EC.presence_of_element_located(
                (By.CSS_SELECTOR, "p[align='justify']")
             )
@@ -322,7 +465,11 @@ class Driver:
 
    def browser_quit(self):
       try:
-         self.browser.quit()
+         self.driver.quit()
       except:
          pass
+
+
+   def refresh_captcha():
+      pass
 

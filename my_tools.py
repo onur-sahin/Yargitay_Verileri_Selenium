@@ -244,7 +244,7 @@ def warning( x, seconds=1000, duration=2000):
    
    while( i >= 0 ):
       if(x[0] != "s"):
-         frequency = 2500  # Set Frequency To 2500 Hertz
+         frequency = 1000  # Set Frequency To 2500 Hertz
          # Set Duration To 1000 ms == 1 second
          winsound.Beep(frequency, duration)
          i -= 1
