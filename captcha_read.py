@@ -19,7 +19,21 @@ def captcha_read(image_no, driver):
       try:
          # https://anti-captcha.com
          solver = CaptchaSolver('antigate', api_key='c8c5d34dcdfb5b93415f58b88a1e630c')
-         # This usage is outdated and needs to be updated. (https://anti-captcha.com)
+          # The provided token is no longer valid and a new token should be obtained 
+          # from the official Anti-Captcha website.
+          #
+          # The current implementation using "antigate" is most likely outdated, 
+          # as the former domain www.antigate.com has been merged with or rebranded 
+          # as www.anti-captcha.com.
+          #
+          # Furthermore, the library `from captcha_solver import CaptchaSolver` 
+          # may also be deprecated. 
+          #
+          # It is recommended to review the updated API documentation on the 
+          # Anti-Captcha website to determine the correct integration method. 
+          # In fact, it might be advisable to stop using this library entirely 
+          # and switch to the official Anti-Captcha client or another supported solution.
+
          raw_data = open("captcha_images/"+ str(image_no) + ".png",  'rb').read()
          result = solver.solve_captcha(raw_data, submiting_time=120)
 
