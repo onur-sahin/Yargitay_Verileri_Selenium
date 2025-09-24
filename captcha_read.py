@@ -17,8 +17,9 @@ def captcha_read(image_no, driver):
    while(True):
 
       try:
-
+         # https://anti-captcha.com
          solver = CaptchaSolver('antigate', api_key='c8c5d34dcdfb5b93415f58b88a1e630c')
+         # This usage is outdated and needs to be updated. (https://anti-captcha.com)
          raw_data = open("captcha_images/"+ str(image_no) + ".png",  'rb').read()
          result = solver.solve_captcha(raw_data, submiting_time=120)
 
